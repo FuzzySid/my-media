@@ -11,3 +11,22 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+nav ul a{
+  font-size: 28px;
+}
+
+ .profile-img{
+  width: 400px;
+  height: 200px;
+  margin: 10px;
+  padding-left: 80px;
+  background: transparent;
+}
+
+
+
+.user-collection{
+  float: right;
+  width: 500px;
+}
