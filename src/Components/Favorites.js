@@ -56,7 +56,7 @@ class Favorites extends Component{
                             <p> From {user.address.city}</p>
                             </div>
                             <div class="card-action center">
-                           <button className="btn #ffab40 orange accent-2" onClick={()=>this.removeUser(user.id)}>Remove</button>
+                           <button className="btn #0d47a1 blue darken-4" onClick={()=>this.removeUser(user.id)}>Remove</button>
                             </div>
                         </div>
                         </div>

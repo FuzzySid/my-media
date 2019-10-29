@@ -1,50 +1,22 @@
 import React,{Component} from 'react';
-import axios from 'axios';
+import { connect } from 'react-redux';
 
 
 class Comments extends Component{
-    state={
-        comments:[]
-    }
-    componentDidMount(){
-        axios.get('https://jsonplaceholder.typicode.com/comments')
-            .then(res=>{
-                //console.log(res);
-                let comments=[];
-                res.data.forEach(comment=>{
-                    if(comment.postId===1)
-                    comments.push(comment);
-                })
-                this.setState({
-                    comments: comments
-                })
-            console.log(this.state)
-                
-            })
-            .catch(err=>{
-                console.log(err);
-            })
-    }
-    deleteComment(id){
-        let comments=[];
-        this.state.comments.forEach(comment=>{
-            if(comment.id!==id)
-            comments.push(comment);
-        })
-        this.setState({
-            comments:comments
-        })
-    }
+    
+   handleDelete=(id)=>{
+       this.props.deleteComment(id)
+   }
     render(){
         
         let comments=[];
-        this.state.comments.forEach(comment=>{
+        this.props.comments.forEach(comment=>{
             comments.push(
                 
     
                         <div class="card-panel #bbdefb blue lighten-4 comments-card">
                         <div className="remove-comment">
-                            <button className="btn orange accent-2" onClick={()=>{this.deleteComment(comment.id)}}>Remove</button>
+                            <button className="btn #0d47a1 blue darken-4" onClick={()=>{this.handleDelete(comment.id)}}>Delete</button>
                         </div>
                         <h5 className="comments-title grey-text">-{comment.email} posted a comment </h5>
                         <span class="black-text">
@@ -62,4 +34,18 @@ class Comments extends Component{
     }
 }
 
-export default Comments;
+const mapStoreToProps=(state)=>{
+    return{
+        comments: state.comments
+    }
+}
+
+const mapDispatchToProps=(dispatch)=>{
+    return{
+        deleteComment: (id)=>{
+            dispatch({type: 'DELETE_COMMENT', id: id})
+        }
+    }
+}
+
+export default connect(mapStoreToProps,mapDispatchToProps)(Comments);
